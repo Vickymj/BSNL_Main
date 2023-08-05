@@ -1,0 +1,49 @@
+{% extends 'site2/index.html' %}
+
+{% block content %}
+<style>
+    .data{
+        display:none;
+    }
+</style>
+<div>
+    <ul class="flex space-x-2 rtl:space-x-reverse">
+        <li>
+            <a href="/" class="text-primary hover:underline">Dashboard</a>
+        </li>
+        <li class="before:content-['/'] ltr:before:mr-1 rtl:before:ml-1">
+            <span>Bank Statement Summary</span>
+        </li>
+    </ul>
+</div>
+<div class="panel">
+    <div class="mb-5 flex items-center justify-between">
+        <center><h5 class="text-lg font-semibold dark:text-white-light">SOCIETY EXPENSES TALLY</h5></center>
+    </div>
+    <div class="mb-5">
+        <div class="rounded bg-[#f1f2f3] p-5 dark:bg-[#060818]">
+            <form>
+               <p>If Want select option and after select the project</p>
+              <div class="wrapper">
+                  <div class="menu">
+                      <select id="name" onchange="form(this.value)">
+                          <option value="1">frist</option>
+                          <option value="2">second</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="content">
+                  <div id="1" class="data">hi </div>
+                  <div id="2" class="data">hello </div>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function form(value) {
+        const content = document.getElementById("content");
+        content.style.display = value == 1 ? "block" : "none";
+    }
+</script>
+{% endblock %}

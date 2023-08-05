@@ -1,0 +1,11 @@
+<form method="post" action="">
+    {% csrf_token %}
+<input type="text" name="username">
+<input type="text" name="password">
+<button type="submit">Submit</button>
+</form>
+
+
+{% for i in dbmodel %}
+{{i.name}}-{{i.password}}
+{% endfor %}

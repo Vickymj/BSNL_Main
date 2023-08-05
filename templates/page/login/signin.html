@@ -1,0 +1,108 @@
+   <html>
+      <head>
+          <link rel="stylesheet" type="text/css" href="style.css">
+      </head>
+<style>
+    body {
+        background-image: url('static/page/img/carousel-2.jpg');
+        background-size: 1400px 1400px;
+    }
+    .container {
+        max-width: 300px;
+        margin: 10%;
+        margin-left: 35%;
+        padding: 50px;
+        background-image: url('static/page/img/bsnllogo.png');
+        background-repeat: no-repeat;
+        border-radius: 5px;
+        align-content: center;
+        background-position: center;
+        background-size: 500px 500px;
+    }
+    h1{
+        text-align:center;
+        margin-bottom:-10px;
+    }
+   h2 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    a {
+        color: red;
+        top:-50%;
+        margin-left:100%;
+        margin-bottom:100%;
+    }
+        a:hover, a:active, a:visited, a:link {
+            text-decoration: none;
+        }
+</style>
+      <body>
+          <div class="container">
+              <a href="home">X</a>
+              <form id="loginForm">
+                  <h1>BSNL</h1>
+                  <h2>Login</h2>
+                  <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="text" id="username" name="username" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" id="password" name="password" required>
+                  </div>
+                  <button type="submit">Login</button>
+
+              </form>
+          </div>
+
+          <script>
+              document.getElementById('loginForm').addEventListener('submit', function (event) {
+                  event.preventDefault(); // Prevent form submission to allow custom validation
+
+                  var username = document.getElementById('username').value;
+                  var password = document.getElementById('password').value;
+
+                  // Custom validation logic
+                  if (username === 'admin' && password === 'password') {
+                      alert('Login successful!');
+                      window.location.href = "app/";
+                  } else {
+                      alert('Invalid username or password. Please try again.');
+                  }
+              });
+          </script>
+      </body>
+      </html> 

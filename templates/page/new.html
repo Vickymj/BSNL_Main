@@ -1,0 +1,125 @@
+<head>
+    <link rel="stylesheet" href="static/home/bootstrap-select.min.css">
+    <link rel="stylesheet" href="static/home/bootstrap.min.css">
+    <link rel="stylesheet" href="static/home/style.css">
+    <link rel="stylesheet" href="static/home/owl.carousel.css">
+    <link rel="stylesheet" href="static/home/owl.theme.css">
+</head>
+
+<style>
+    .slider-content h2 {
+        font-size: 40px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        color: blue;
+        font-weight: 500;
+    }
+    .slider-content p {
+        font-size: 16px;
+        margin-bottom: 60px;
+        color: whitesmoke;
+    }
+    .slider-area {
+        position: relative;
+        height: 630px
+    }
+
+    #bg-slider .item img {
+        width: 100%;
+        height: 630px
+    }
+    .slider-content {
+        position: absolute;
+        top: 20%;
+        text-align: center;
+        color: #FFF;
+        width: 100%;
+    }
+        .slider-content p {
+            font-size: 16px;
+            margin-bottom: 60px;
+            color: whitesmoke;
+        }
+    .slider .owl-theme .owl-controls {
+        margin-top: 0px;
+        position: relative;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="slider-area" id="home">
+        <div class="slider">
+            <div id="bg-slider" class="owl-carousel owl-theme">
+
+                <div class="item"><img src="{% static 'img/carousel-1.jpg'%}" alt="G"></div>
+                <div class="item"><img src="static/img/carousel-2.jpg" alt="The Last of us"></div>
+                <div class="item"><img src="static/img/carousel-1.jpg" alt="G"></div>
+
+            </div>
+        </div>
+        <div class="slider-content">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+                    <h2>property Searching Just Got So Easy</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
+                                <div class="row">
+                                    <div class="col-sm-3 col-xs-6">
+                                        <div class="count-item">
+                                            <!--<div class="count-item-circle">
+                                                <span class="pe-7s-users"></span>
+                                            </div>-->
+                                            <div class="chart" data-percent="5000">
+                                                <h2 class="percent" id="counter">10</h2>
+                                                <h5>HAPPY CUSTOMER </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-6">
+                                        <div class="count-item">
+                                            <!--<div class="count-item-circle">
+                                                <span class="pe-7s-home"></span>
+                                            </div>-->
+                                            <div class="chart" data-percent="10">
+                                                <h2 class="percent" id="counter1">10</h2>
+                                                <h5>Properties in stock</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-6">
+                                        <div class="count-item">
+                                            <!--<div class="count-item-circle">
+                                                <span class="pe-7s-flag"></span>
+                                            </div>-->
+                                            <div class="chart" data-percent="5">
+                                                <h2 class="percent" id="counter2">10</h2>
+                                                <h5>City registered </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-6">
+                                        <div class="count-item">
+                                            <!--<div class="count-item-circle">
+                                                <span class="pe-7s-graph2"></span>
+                                            </div>-->
+                                            <div class="chart" data-percent="12">
+                                                <h2 class="percent" id="counter3">12</h2>
+                                                <h5>DEALER BRANCHES</h5>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="static/home/js/ss.js"></script>
+</body>

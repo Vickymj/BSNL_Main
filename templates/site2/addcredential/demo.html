@@ -1,0 +1,147 @@
+{% extends 'site2/index.html' %}
+{% block content %}
+{% load static %}
+<form class="space-y-5 ">
+    <label class="text-lg font-semibold dark:text-white-light" style="background-color: blueviolet;"><b>ADD CREDENTIALS - New Booking</b></label>
+    <h2 class="text-lg font-semibold dark:text-white-light p-1" style="background-color: rgb(138, 202, 167);"><b>Member Particulars</b></h2>
+    <div class="panel">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+            <div>
+                <label for="customFname" class="p-1">First Name</label>
+                <input id="customFname" type="text" placeholder="Enter First Name" class="form-input" x-model="form4.firstName" />
+            </div>
+            <div>
+                <label class="p-1">Father/Husband Name</label>
+                <input type="text" class="form-input" placeholder="Father/HUsband Name">
+            </div>
+            <div >
+                <label class="p-1">Date of Brith</label>
+                <input type="date" class="form-input" placeholder="DOB">
+            </div>
+            <div>
+                <label class="p-1">Age</label>
+                <input type="number" class="form-input" placeholder="Age">
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+            <div class="p-1">
+                <label class="p-1">Moblie Number</label>
+                <input type="number" class="form-input" placeholder="Moblie Number">
+            </div>
+            <div>
+                <label class="p-1">Alternate Number</label>
+                <input type="number" class="form-input" placeholder="Alternate Number">
+            </div>
+            <div>
+                <label class="p-1">Email ID</label>
+                <input type="email" class="form-input" placeholder="email id">
+            </div>
+            <div>
+                <label> </label>
+                <input type="file" class="form-input " placeholder="Add Document">
+            </div>
+            <div>
+                <label >Residential Address</label>
+                <input type="text" class="form-input" placeholder="Residential Address">
+            </div>
+            <div>
+                <label>Pan Number</label>
+                <input type="number" class="form-input" placeholder="Pan Number">
+            </div>
+            <div>
+                <label >Aadhaar Number</label>
+                <input type="number" class="form-input" placeholder="Aadhaar Number">
+            </div>
+        </div>
+    </div>
+    <div class="panel p">
+        <h1 class="text-lg font-semibold dark:text-white-light" style="background-color: rgb(138, 202, 167);"><b>Nominee Particulars</b></h1>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+            <div > 
+                <label>Nominee Name</label>
+                <input type="text" class="form-input" placeholder="Enter Nominee Name">
+            </div>
+            <div>
+                <label>Nominee Age</label>
+                <input type="number" class="form-input" placeholder="Nominee Age">
+            </div>
+            <div>
+                <label>Nominee Relationship</label>
+                <input type="text" class="form-input" placeholder="Nomiee Relationship">
+            </div>
+            <div>
+                <label>Nominee Address</label>
+                <input type="text" class="form-input" placeholder="Nomiee Address">
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+            <div>
+                <label>Project</label>
+                <input type="text" class="form-input" placeholder="Site Details">
+            </div>
+            <div>
+                <label>Dimension</label>
+                <input type="text" class="form-input" placeholder="Dimension">
+            </div>
+            <div>
+                <label>Total Site Value</label>
+                <input type="number" class="form-input" placeholder="Total site value">
+            </div>
+            <div>
+                <label>Down Payment value</label>
+                <input type="number" class="form-input" placeholder="Down payment value">
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-5">
+            <div>
+                <label >Site Reference</label>
+                <input type="text" class="form-input" placeholder="Site Reference">
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div>
+            <label>Mode of pay</label>
+            <input type="text" class="form-input" placeholder="Mode of pay" />
+        </div>
+        <div>
+            <label>Bank</label>
+            <input type="number" class="form-input" placeholder="Bank Name" />
+        </div>
+        <div>
+            <label>Branch</label>
+            <input type="text" class="form-input" placeholder="Branch" />
+        </div>
+        <div>
+            <label>Cheque No</label>
+            <input type="number" class="form-input" placeholder="Cheque No" />
+        </div>
+        <div>
+            <label>Pay Date</label>
+            <input type="date" class="form-input" placeholder="pay date" />
+        </div>
+        <div>
+            <label>Amount</label>
+            <input type="number" class="form-input" placeholder="Amount" />
+        </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div>
+            <label>Seniority No</label>
+            <input type="number" class="form-input" placeholder="Seniority No" />
+        </div>
+        <div>
+            <label>AM No</label>
+            <input type="number" class="form-input" placeholder="Am no" />
+        </div>
+        <div>
+            <label>Receipt No</label>
+            <input type="number" class="form-input" placeholder="Receipt No" />
+        </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-5">
+        <center><button type="submit" class="btn btn-primary text-lg font-semibold dark:text-white-light">Submit Application</button></center>
+    </div>
+</form>
+{% endblock %}
