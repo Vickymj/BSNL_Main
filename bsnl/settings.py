@@ -79,7 +79,6 @@ WSGI_APPLICATION = 'bsnl.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-<<<<<<< HEAD
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bsnl',
@@ -90,15 +89,7 @@ DATABASES = {
         'OPTIONS':{
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
         }
-=======
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "",
-        "USER": "root",
-        "PASSWORD": "",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
->>>>>>> 613563f4fed25f8e0408df577869750aeef09147
+
     }
 }
 

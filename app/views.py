@@ -27,3 +27,5 @@ def receipt(request):
 	return render(request,'site2/receipts/receipts.html')
 def login(request):
 	return render(request,'site2/login/login.html')
+def project(request):
+    return render(request,'site2/project/project.html')
