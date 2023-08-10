@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'bsnl.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "",
+        "NAME": "bsnlproject",
         "USER": "root",
         "PASSWORD": "",
         "HOST": "127.0.0.1",
