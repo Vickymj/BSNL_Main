@@ -1,121 +1,31 @@
 {% extends 'site2/index.html'%}
 {% block content %}
 {% load static %}
- <form class="space-y-5" @submit.prevent="submitForm4()">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div :class="[isSubmitForm4 ? (form4.firstName ? 'has-success' : 'has-error') : '']">
-            <label for="customFname">First Name</label>
-            <input id="customFname" type="text" placeholder="Enter First Name" class="form-input" x-model="form4.firstName" />
-            <template x-if="isSubmitForm4 && form4.firstName">
-                <p class="text-[#1abc9c] mt-1">Looks Good!</p>
-            </template>
-            <template x-if="isSubmitForm4 && !form4.firstName">
-                <p class="text-danger mt-1">Please fill the first name</p>
-            </template>
-        </div>
-        <div :class="[isSubmitForm4 ? (form4.lastName ? 'has-success' : 'has-error') : '']">
-            <label for="customLname">Last name</label>
-            <input id="customLname" type="text" placeholder="Enter Last Name" class="form-input" x-model="form4.lastName" />
-            <template x-if="isSubmitForm4 && form4.lastName">
-                <p class="text-[#1abc9c] mt-1">Looks Good!</p>
-            </template>
-            <template x-if="isSubmitForm4 && !form4.lastName">
-                <p class="text-danger mt-1">Please fill the last name</p>
-            </template>
-        </div>
-        <div :class="[isSubmitForm4 ? (form4.userName ? 'has-success' : 'has-error') : '']">
-            <label for="customeEmail">Username</label>
-            <div class="flex">
-                <div class="bg-[#eee] flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] dark:bg-[#1b2e4b]">@</div>
-                <input id="customeEmail" type="text" placeholder="Enter Username" class="form-input ltr:rounded-l-none rtl:rounded-r-none" x-model="form4.userName" />
-            </div>
-            <template x-if="isSubmitForm4 && form4.userName">
-                <p class="text-[#1abc9c] mt-1">Looks Good!</p>
-            </template>
-            <template x-if="isSubmitForm4 && !form4.userName">
-                <p class="text-danger mt-1">Please choose a userName</p>
-            </template>
-        </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-        <div class="md:col-span-2" :class="[isSubmitForm4 ? (form4.city ? 'has-success' : 'has-error') : '']">
-            <label for="customeCity">City</label>
-            <input id="customeCity" type="text" placeholder="Enter City" class="form-input" x-model="form4.city" />
-            <template x-if="isSubmitForm4 && form4.city">
-                <p class="text-[#1abc9c] mt-1">Looks Good!</p>
-            </template>
-            <template x-if="isSubmitForm4 && !form4.city">
-                <p class="text-danger mt-1">Please provide a valid city</p>
-            </template>
-        </div>
-        <div :class="[isSubmitForm4 ? (form4.state ? 'has-success' : 'has-error') : '']">
-            <label for="customeState">State</label>
-            <input id="customeState" type="text" placeholder="Enter State" class="form-input" x-model="form4.state" />
-            <template x-if="isSubmitForm4 && form4.state">
-                <p class="text-[#1abc9c] mt-1">Looks Good!</p>
-            </template>
-            <template x-if="isSubmitForm4 && !form4.state">
-                <p class="text-danger mt-1">Please provide a valid state</p>
-            </template>
-        </div>
-        <div :class="[isSubmitForm4 ? (form4.zip ? 'has-success' : 'has-error') : '']">
-            <label for="customeZip">Zip</label>
-            <input id="customeZip" type="text" placeholder="Enter Zip" class="form-input" x-model="form4.zip" />
-            <template x-if="isSubmitForm4 && form4.zip">
-                <p class="text-[#1abc9c] mt-1">Looks Good!</p>
-            </template>
-            <template x-if="isSubmitForm4 && !form4.zip">
-                <p class="text-danger mt-1">Please provide a valid zip</p>
-            </template>
-        </div>
-    </div>
-    <div :class="[isSubmitForm4 ? (form4.isTerms ? 'has-success' : 'has-error') : '']">
-        <label class="inline-flex cursor-pointer mt-1">
-            <input type="checkbox" class="form-checkbox" x-model="form4.isTerms" />
-            <span class="text-white-dark" ">Agree to terms and conditions</span>
-        </label>
-        <template x-if="isSubmitForm4 && !form4.isTerms">
-            <p class="text-danger mt-1">You must agree before submitting.</p>
-        </template>
-    </div>
-    <button type="submit" class="btn btn-primary !mt-6">Submit Form</button>
-</form>
-
+<div class="panel mt-6">
+    <table>
+        <thead>
+            <tr>
+                <th>S.NO</th>
+                <th>Customer Name</th>
+                <th>Date of Receipt</th>
+                <th>Receipt No</th>
+                <th>Cheque No</th>
+                <th>Amount</th>
+                <th>Pay Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Muthu</td>
+                <td>02/04/2010</td>
+                <td>2</td>
+                <td>5</td>
+                <td>21345</td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
 <!-- script -->
-<script>
- document.addEventListener("alpine:init", () => {
-        Alpine.data("form", () => ({
-            form4: {
-                firstName: 'Shaun',
-                lastName: 'Park',
-                userName: '',
-                city: '',
-                state: '',
-                zip: '',
-                isTerms: false
-            },
-            isSubmitForm4: false,
-            submitForm4() {
-                this.isSubmitForm4 = true;
-                if (this.form4.firstName && this.form4.lastName && this.form4.userName && this.form4.city && this.form4.state && this.form4.zip && this.form4.isTerms) {
-                    //form validated success
-                    this.showMessage('Form submitted successfully.');
-                }
-            },
-            showMessage(msg = '', type = 'success') {
-                const toast = window.Swal.mixin({
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                toast.fire({
-                    icon: type,
-                    title: msg,
-                    padding: '10px 20px'
-                });
-            },
-        }));
-    });
-</script>
 {% endblock %}

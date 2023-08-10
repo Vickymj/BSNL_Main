@@ -1,92 +1,63 @@
-   <html>
-      <head>
-          <link rel="stylesheet" type="text/css" href="style.css">
-      </head>
-<style>
-    body {
-        background-image: url('static/page/img/carousel-2.jpg');
-        background-size: 1400px 1400px;
-    }
-    .container {
-        max-width: 300px;
-        margin: 10%;
-        margin-left: 35%;
-        padding: 50px;
-        background-image: url('static/page/img/bsnllogo.png');
-        background-repeat: no-repeat;
-        border-radius: 5px;
-        align-content: center;
-        background-position: center;
-        background-size: 500px 500px;
-    }
-    h1{
-        text-align:center;
-        margin-bottom:-10px;
-    }
-   h2 {
-        text-align: center;
-        margin-bottom: 10px;
-    }
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    
+<!-- Mirrored from html.vristo.sbthemes.com/auth-cover-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Jul 2023 07:03:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>BSNL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'site2/assets/css/perfect-scrollbar.min.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'site2/assets/css/style.css' %}" />
+    <link defer rel="stylesheet" type="text/css" media="screen" href="{% static 'site2/assets/css/animate.css' %}" />
+    
+    <script src="{% static 'site2/assets/js/perfect-scrollbar.min.js' %}"></script>
+    <script defer src="{% static 'site2/assets/js/popper.min.js' %}"></script>
+    <script defer src="{% static 'site2/assets/js/tippy-bundle.umd.min.js' %}"></script>
+    <script defer src="{% static 'site2/assets/js/sweetalert.min.js' %}"></script>
+</head>
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+    <body
+        x-data="main"
+        class="relative overflow-x-hidden font-nunito text-sm font-normal antialiased"
+        :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]"
+    >
 
-    label {
-        display: block;
-        font-weight: bold;
-    }
+    <div class="main-container min-h-screen text-black dark:text-white-dark">
+        <!-- start main content section -->
+        <div class="flex min-h-screen items-center justify-center bg-[url('../images/map.svg')] bg-cover bg-center dark:bg-[url('../images/map-dark.svg')]">
+            <div class="panel m-6 w-full max-w-lg sm:w-[480px]">
+                <h2 class="mb-3 text-2xl font-bold">Sign In</h2>
+                <p class="mb-7">Enter your email and password to login</p>
+                <form class="space-y-5 " id="loginForm">
+                    <div>
+                        <label for="email">Email</label>
+                        <input id="username" type="text" class="form-input" placeholder="Enter Email" />
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input id="password" type="password" class="form-input" placeholder="Enter Password" />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">SIGN IN</button>
+                </form>
+            </div>
+        </div>
+        <!-- end main content section -->
+    </div>
+        <script src="{% static 'site2/assets/js/alpine-collaspe.min.js' %}"></script>
+        <script src="{% static 'site2/assets/js/alpine-persist.min.js'%}"></script>
+        <script defer src="{% static 'site2/assets/js/alpine-ui.min.js'%}"></script>
+        <script defer src="{% static 'site2/assets/js/alpine-focus.min.js'%}"></script>
+        <script defer src="{% static 'site2/assets/js/alpine.min.js'%}"></script>
+        <script src="{% static 'site2/assets/js/custom.js'%}"></script>
+        <script defer src="{% static 'site2/assets/js/apexcharts.js'%}"></script>
 
-    input[type="text"],
-    input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    button[type="submit"] {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-        button[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    a {
-        color: red;
-        top:-50%;
-        margin-left:100%;
-        margin-bottom:100%;
-    }
-        a:hover, a:active, a:visited, a:link {
-            text-decoration: none;
-        }
-</style>
-      <body>
-          <div class="container">
-              <a href="home">X</a>
-              <form id="loginForm">
-                  <h1>BSNL</h1>
-                  <h2>Login</h2>
-                  <div class="form-group">
-                      <label for="username">Username</label>
-                      <input type="text" id="username" name="username" required>
-                  </div>
-                  <div class="form-group">
-                      <label for="password">Password</label>
-                      <input type="password" id="password" name="password" required>
-                  </div>
-                  <button type="submit">Login</button>
-
-              </form>
-          </div>
 
           <script>
               document.getElementById('loginForm').addEventListener('submit', function (event) {

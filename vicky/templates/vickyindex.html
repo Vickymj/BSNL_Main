@@ -1,11 +1,49 @@
-<form method="post" action="">
+<!-- <form method="post" action="" id="add">
     {% csrf_token %}
-<input type="text" name="username">
-<input type="text" name="password">
-<button type="submit">Submit</button>
+    <div >
+        <input type="text" name="username">
+        <input type="text" name="password">
+        <button onclick="add_more_field()">Add More</button>
+    </div>
+
 </form>
-
-
+<script>
+    var count = 1;
+    function add_more_field() {
+        this.
+    }
+</script> -->
+<html>
+<head>
+    <title>Add More Fields</title>
+    <script>
+        function add_more_field() {
+            var container = document.getElementById("container");
+            
+            var newRow = document.createElement("div");
+            newRow.innerHTML = `
+                <input type="text" name="username">
+                <input type="text" name="password">
+            `;
+            
+            container.appendChild(newRow);
+        }
+    </script>
+</head>
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+        <div id="container">
+            <!-- Initial fields -->
+            <input type="text" name="username">
+            <input type="text" name="password">
+        </div>
+        
+        <button type="button" onclick="add_more_field()">Add More</button>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
 {% for i in dbmodel %}
 {{i.name}}-{{i.password}}
 {% endfor %}

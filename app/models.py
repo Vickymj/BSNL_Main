@@ -32,3 +32,18 @@ class Newbooking(models.Model):
 	receiptno = models.CharField(max_length=100)
 	class Meta:
 		db_table='newbook'
+
+# class Receipt(models.Model):
+# 	custname=models.CharField()
+# 	seniorityno=models.CharField()
+# 	dimension=models.CharField()
+# 	amount=models.CharField()
+# 	modeofpay=models.CharField()
+# 	chequeno=models.CharField()
+# 	bank=models.CharField()
+# 	branch=models.CharField()
+# 	paydate=models.DateField()
+# 	paystatus=models.CharField()
+# 	dateofreceipt=models.DateField()
+# 	class Meta:
+# 		db_table:'recepit'

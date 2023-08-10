@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\bsnl",
+    "\\page",
+    "\\static",
+    "\\static\\page",
+    "\\static\\page\\img",
+    "\\templates",
+    "\\templates\\page",
+    "\\templates\\page\\login",
+    "\\vicky\\templates"
+  ],
+  "SelectedNode": "\\static",
+  "PreviewInSolutionExplorer": false
+}

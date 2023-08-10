@@ -1,0 +1,26 @@
+{% extends 'page/commons/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="owl-carousel">
+  <div class="item" style="background-image: url('static/page/img/carousel-22.jpg');">
+    <!-- Content for Slide 1 -->
+  </div>
+  <div class="item" style="background-image: url('image2.jpg');">
+    <!-- Content for Slide 2 -->
+  </div>
+  <!-- Add more slides as needed -->
+</div>
+<script>
+  $(document).ready(function(){
+    $('.owl-carousel').owlCarousel({
+      items: 1,
+      loop: true,
+      autoplay: true,
+      autoplayTimeout: 5000, // Adjust as needed
+      autoplayHoverPause: true
+    });
+  });
+</script>
+
+{% endblock %}
