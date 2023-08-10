@@ -18,3 +18,17 @@ def index(request):
 def index1(request):
     dbmodel = Test.objects.all()
     return render(request, 'vickyindex.html',{'dbmodel':dbmodel})
+def value(request):
+    if request.method == 'POST':
+        form = TestvalueForm(request.POST)
+        if form.is_valid():
+            name = form.save()  # Save parent data
+
+            value = form.cleaned_data['value']
+            Value.objects.create(name=name, value=value)  # Save child data with foreign key
+            
+            return redirect('success')  # Redirect to a success page
+    else:
+        form = TestvalueForm()
+    
+    return render(request, 'your_template.html', {'form': form})
