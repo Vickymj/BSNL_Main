@@ -1486,12 +1486,11 @@ table.table-compact thead tr th {
 :after,
 :before {
     box-sizing: border-box;
-    /* border: 0 solid #e5e7eb */
+     /*border: 0 solid #e5e7eb */
 }
-:after,
-:before {
+.bord {
     box-sizing: border-box;
-    border: 0 solid #e5e7eb
+    border: 0 solid #e5e7eb 
 }
 
 :after,
@@ -1574,10 +1573,9 @@ sup {
     top: -.5em
 }
 
-table {
+table, th, td {
     text-indent: 0;
-    border-color: inherit;
-    border-collapse: collapse
+    
 }
 
 button,
@@ -3884,7 +3882,10 @@ table {
     border-collapse: collapse !important;
    
 }
-
+table,th,td{
+    border:solid #e5e7eb;
+    border-style: ridge; 
+}
 table tfoot tr,
 table thead tr {
     border-bottom-width: 0;

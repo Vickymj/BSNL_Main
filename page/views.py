@@ -15,3 +15,7 @@ def board(request):
     return render(request, 'page/board.html')
 def signin(request):
     return render(request,'page/login/signin.html')
+def about(request):
+    return render(request,'page/about.html  ')
+def test(request):
+    return render(request,'page/customer/home.html')
