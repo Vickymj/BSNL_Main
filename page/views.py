@@ -1,8 +1,14 @@
 from django.shortcuts import render
+from app.models import Project
 
 # Create your views here.
 def index(request):
-    return render(request, 'page/home.html')
+    data = Project.objects.all()
+    context={
+        "data":data
+    }
+    return render(request,'page/home.html', {"data": data})
+
 def contact(request):
     return render(request, 'page/contact.html')
 def project(request):

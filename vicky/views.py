@@ -1,6 +1,6 @@
-from django.shortcuts import render, HttpResponse
-from .models import Test
-
+from django.shortcuts import render, HttpResponse,redirect
+from .models import Test,Value
+from .forms import TestForm,ValueForm,CombinedForm
 # Create your views here.
 def index(request):
     if request.method == 'POST':
@@ -18,17 +18,35 @@ def index(request):
 def index1(request):
     dbmodel = Test.objects.all()
     return render(request, 'vickyindex.html',{'dbmodel':dbmodel})
-def value(request):
+def testing_db(request):
     if request.method == 'POST':
-        form = TestvalueForm(request.POST)
+        form = CombinedForm(request.POST)
         if form.is_valid():
-            name = form.save()  # Save parent data
-
+            name = form.cleaned_data['name']
+            password = form.cleaned_data['password']
             value = form.cleaned_data['value']
-            Value.objects.create(name=name, value=value)  # Save child data with foreign key
             
-            return redirect('success')  # Redirect to a success page
+            # Save to Test model
+            test_instance = Test(name=name, password=password)
+            test_instance.save()
+
+            # Save to Value model
+            value_instance = Value(name=test_instance, value=value)
+            value_instance.save()
+
+            return HttpResponse('done')
     else:
-        form = TestvalueForm()
-    
-    return render(request, 'your_template.html', {'form': form})
+        form = CombinedForm()
+
+    return render(request, 'template.html', {'form': form})
+
+# def testing_db(request):
+#         db1 = Test()
+#         db1.name ='Vicky'
+#         db1.password = 'vike@123'
+#         db1.save()
+#         db2 = Value()
+#         db2.name_id=db1.id
+#         db2.value = 'tech'
+#         db2.save()
+#         return HttpResponse('done')
