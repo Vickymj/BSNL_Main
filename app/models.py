@@ -32,6 +32,28 @@ class Newbooking(models.Model):
 	receiptno = models.CharField(max_length=100)
 	class Meta:
 		db_table='newbook'
+class Family(models.Model):
+	membername = models.ForeignKey(Newbooking, on_delete=models.CASCADE)
+	familymemname=models.CharField(max_length=100)
+	familymemage=models.CharField(max_length=10)
+	familymemrelation=models.CharField(max_length=100)
+
+#Project create
+class Project(models.Model):
+	projectname=models.CharField(max_length=100)
+	shotcode = models.CharField(max_length=100)
+	dp_price = models.CharField(max_length=100)
+	first_install = models.CharField(max_length=100)
+	second_install = models.CharField(max_length=100)
+	third_install = models.CharField(max_length=100)
+	status = models.CharField(max_length=100)
+	images = models.ImageField(upload_to='static/images/')
+	address = models.CharField(max_length=100)
+#images
+# class Image(models.Model):
+# 	projectname = models.ForeignKey(Project,on_delete=models.CASCADE)
+# 	images = models.ImageField(upload_to='images/')
+# 	address = models.CharField(max_length=100)
 
 # class Receipt(models.Model):
 # 	custname=models.CharField()

@@ -3,5 +3,5 @@ from .views import *
 
 urlpatterns = [
     path('',index),
-    path('all',index1)
+    path('all',testing_db)
 ]
