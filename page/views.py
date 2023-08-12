@@ -12,7 +12,12 @@ def index(request):
 def contact(request):
     return render(request, 'page/contact.html')
 def project(request):
-    return render(request, 'page/projects.html')
+    data = Project.objects.all()
+    context={
+        "data":data
+    }
+    
+    return render(request, 'page/projects.html', {"data": data})
 def services(request):
     return render(request, 'page/services.html')
 def gallery(request):
