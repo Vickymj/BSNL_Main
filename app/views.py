@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from .models import Newbooking,Family,Project
-from .forms import NewbookingForm,ProjectForm
+from .models import Newbooking,Family,Project,Receipt
+from .forms import NewbookingForm,ProjectForm,ReceiptForm,SearchForm
 from django.contrib import messages
 # Create your views here.
 def home(request):
@@ -11,16 +11,6 @@ def booksum(request):
 	return render(request,'site2/dashboard/booksum.html')
 def bss(request):
 	return render(request,'site2/dashboard/bss.html')
-# def newbooking(request):
-#     if request.method == "POST":
-#         form = NewbookingForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, f'Your account has been created. You can log in now!')
-#             return HttpResponseRedirect('newbooking')
-#     else:
-#         form = NewbookingForm
-#     return render(request, 'site2/addcredential/demo.html',{'form':form, })
 
 def newbooking(request):
     if request.method == 'POST':
@@ -72,9 +62,62 @@ def newbooking(request):
     return render(request,  'site2/addcredential/newbooking.html',{'form':form, })
 
 def generate(request):
-	return render(request,'site2/addcredential/generate.html')
+    selected_customer = None
+    order_created = False
+    matching_customers = []
+
+    if request.method == 'POST':
+        action = request.POST.get('action')
+
+        if action == 'search_customer':
+            membername = request.POST.get('search_membername')
+            customers = Newbooking.objects.filter(membername=membername)
+
+            if customers.exists():
+                matching_customers = customers
+
+        elif action == 'create_order':
+            membername_id = request.POST.get('selected_customer')
+            seniorityno = request.POST.get('seniorityno')
+            amount = request.POST.get('amount')
+            modeofpay = request.POST.get('modeofpay')
+            chequeno = request.POST.get('chequeno')
+            bank = request.POST.get('bank')
+            branch = request.POST.get('branch')
+            paydate = request.POST.get('paydate')
+            paystatus = request.POST.get('paystatus')
+            dateofreceipt = request.POST.get('dateofreceipt')
+
+            try:
+                customer = Newbooking.objects.get(id=membername_id)
+
+                # Create a new order instance
+                order = Receipt(
+                    membername=customer,
+                    seniorityno=seniorityno,
+                    amount=amount,
+                    modeofpay=modeofpay,
+                    chequeno=chequeno,
+                    bank=bank,
+                    branch=branch,
+                    paydate=paydate,
+                    paystatus=paystatus,
+                    dateofreceipt=dateofreceipt
+                )
+                order.save()
+                order_created = True
+
+            except Newbooking.DoesNotExist:
+                customer = None
+
+    return render(request, 'site2/addcredential/generate.html', {'selected_customer': selected_customer, 'order_created': order_created, 'matching_customers': matching_customers})
+
 def receipt(request):
-	return render(request,'site2/receipts/receipts.html')
+    data = Receipt.objects.all()
+    context={
+        "data":data
+    }
+    return render(request,'site2/receipts/receipts.html', {"data": data})
 def login(request):
 	return render(request,'site2/login/login.html')
 def project(request):
@@ -94,3 +137,11 @@ def project_view(request):
         "data":data
     }
     return render(request,'page/home.html', {"data": data})
+def update_data(request, id):
+    venue = State.objects.get(id=id)
+    form = StateForm(request.POST or None, instance=venue)
+    if form.is_valid():
+        form.save()
+        return redirect('/alldata')
+    return render(request,'update_data.html',{'venue':venue,
+                                                'form':form})

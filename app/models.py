@@ -55,17 +55,17 @@ class Project(models.Model):
 # 	images = models.ImageField(upload_to='images/')
 # 	address = models.CharField(max_length=100)
 
-# class Receipt(models.Model):
-# 	custname=models.CharField()
-# 	seniorityno=models.CharField()
-# 	dimension=models.CharField()
-# 	amount=models.CharField()
-# 	modeofpay=models.CharField()
-# 	chequeno=models.CharField()
-# 	bank=models.CharField()
-# 	branch=models.CharField()
-# 	paydate=models.DateField()
-# 	paystatus=models.CharField()
-# 	dateofreceipt=models.DateField()
-# 	class Meta:
-# 		db_table:'recepit'
+class Receipt(models.Model):
+	membername = models.ForeignKey(Newbooking, on_delete=models.CASCADE)
+	seniorityno=models.CharField(max_length=120)
+	dimension=models.CharField(max_length=120)
+	amount=models.CharField(max_length=120)
+	modeofpay=models.CharField(max_length=120)
+	chequeno=models.CharField(max_length=120)
+	bank=models.CharField(max_length=120)
+	branch=models.CharField(max_length=120)
+	paydate=models.DateField(max_length=120)
+	paystatus=models.CharField(max_length=120)
+	dateofreceipt=models.DateField(max_length=120)
+	class Meta:
+		db_table:'recepit'

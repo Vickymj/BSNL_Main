@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Newbooking,Project
+from .models import Newbooking,Project,Receipt
 
 class NewbookingForm(forms.Form):
 	membername = forms.CharField(max_length=120)
@@ -39,3 +39,10 @@ class ProjectForm(forms.ModelForm):
 	class Meta:
 		model=Project
 		fields='__all__'
+class ReceiptForm(forms.ModelForm):
+	class Meta:
+		model=Receipt
+		fields = ['membername', 'seniorityno', 'dimension', 'amount', 'modeofpay', 'chequeno', 'bank', 'branch', 'paydate', 'paystatus', 'dateofreceipt']
+class SearchForm(forms.Form):
+	membername = forms.CharField(max_length=120)
+	

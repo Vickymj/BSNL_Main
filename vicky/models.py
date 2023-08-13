@@ -11,3 +11,8 @@ class Value(models.Model):
     value = models.CharField(max_length=120)
     class Meta:
         db_table = "test2"
+class Order(models.Model):
+    name = models.ForeignKey(Test,on_delete=models.CASCADE)
+    order_date = models.DateField()
+    product_name = models.CharField(max_length=100)
+    quantity = models.IntegerField()

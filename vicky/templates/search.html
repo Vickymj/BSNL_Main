@@ -1,0 +1,30 @@
+<form method="post">
+    {% csrf_token %}
+    <label for="customer_name">Customer Name:</label>
+    <input type="text" name="name" id="customer_name" required>
+    
+    {% if matching_customers %}
+        <h2>Matching Customers:</h2>
+        <ul>
+            {% for customer in matching_customers %}
+                <li>
+                    {{ customer.name }}
+                    <input type="hidden" name="customer_id" value="{{ customer.id }}">
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <label for="order_date">Order Date:</label>
+        <input type="date" name="order_date" id="order_date" required>
+        
+        <label for="product_name">Product Name:</label>
+        <input type="text" name="product_name" id="product_name" required>
+        
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" id="quantity" required>
+        
+        <button type="submit" name="action" value="create_order">Create Order</button>
+    {% else %}
+        <button type="submit" name="action" value="search_customer">Search Customer</button>
+    {% endif %}
+</form>

@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Test ,Value
+from .models import Test ,Value,Order
 
 # class TestForm(forms.ModelForm):
 #     class Meta:
@@ -32,3 +32,12 @@ class CombinedForm(forms.Form):
     name = forms.CharField(max_length=100)
     password = forms.CharField(max_length=100)
     value = forms.CharField(max_length=100)
+class OrderForm(forms.ModelForm):
+    customer_name = forms.CharField(max_length=100)
+    order_date = forms.DateField()
+    product_name = forms.CharField(max_length=100)
+    quantity = forms.IntegerField()
+
+    class Meta:
+        model = Order
+        fields = ['customer_name', 'order_date', 'product_name', 'quantity']

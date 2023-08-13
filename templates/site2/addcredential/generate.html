@@ -1,77 +1,59 @@
 {% extends 'site2/index.html'%}
 {% block content %}
 {% load static %}
-<form class="space-y-5">
-    <label class="text-xl font-semibold dark:text-white-light p-2" style="background-color: blueviolet;"><b>Generate Receipts</b></label>
-    <div class="panel">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-5"> 
-            <div>
-                <label>Customer Name</label>
-                <input id="customFname" type="text" placeholder="Customer Name" class="form-input" x-model="form4.firstName" />
-            </div>
-            <div>
-                <label>Dimension</label>
-                <input type="text" class="form-input"  placeholder="Dimension">
-            </div>
-            <div>
-                <label>Amount Paid</label>
-                <input type="number" class="form-input" placeholder="Amount Paid">
-            </div>
-            <div>
-                <label></label>
-            </div>
-        </div>
-    </div>
-    <div class="panel">
-        <h2 class="text-lg font-semibold dark:text-white-light p-1" style="background-color: rgb(138, 202, 167);"><b>Receipts Details</b></h2>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 p-2">
-        <div>
-            <label>Mode of Pay</label>
-            <input type="text" class="form-input" placeholder="Mode of Pay">
-        </div>
-        <div>
-            <label>CHEQ/NEFT No</label>
-            <input type="number" class="form-input" placeholder="Cheq/Neft No">
-        </div>
-        <div>
-            <label>Bank</label>
-            <input type="text" class="form-input" placeholder="Bank">
-        </div>
-        <div>
-            <label></label>
-        </div>
-        <div>
-            <label>Branch</label>
-            <input type="text" class="form-input" placeholder="Branch">
-        </div>
-        <div>
-            <label>Pay Date</label>
-            <input type="date" class="form-input" placeholder="Pay Date">
-        </div>
-        <div>
-            <label>Amount</label>
-            <input type="number" class="form-input" placeholder="Amount">
-        </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-        <div>
-            <label>Pay Status</label>
-            <input type="text" class="form-input" placeholder="Pay status" />
-        </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-        <div>
-            <label>Receipt No</label>
-            <input type="number" class="form-input" placeholder="Receipt No" />
-        </div>
-        <div>
-            <label>Date of Receipt</label>
-            <input type="date" class="form-input" placeholder="" />
-        </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-1 gap-5">
-        <center><button type="submit" class="btn btn-primary text-lg font-semibold dark:text-white-light">Submit</button></center>
-    </div>
-    </div>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="search_membername">Search Customer:</label>
+    <input type="text" name="search_membername" id="search_membername" required>
+    <button type="submit" name="action" value="search_customer">Search Customer</button>
 </form>
+
+{% if matching_customers %}
+    <h2>Matching Customers:</h2>
+    <ul>
+        {% for customer in matching_customers %}
+            <li>
+                {{ customer.membername }}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="selected_customer" value="{{ customer.id }}">
+                    
+                    <label for="seniorityno">Seniority No:</label>
+                    <input type="text" name="seniorityno" required>
+                    
+                    <label for="amount">Amount:</label>
+                    <input type="text" name="amount" required>
+                    <label for="dimension">Dimension</label>
+                    <input type="text" name="dimension">
+                    <label for="modeofpay">modeofpay</label>
+                    <input type="text" name="modeofpay">
+                    <label for="bank">bank</label>
+                    <input type="text" name="bank">
+                    <label for="chequeno">chequeno</label>
+                    <input type="text" name="chequeno">
+                    <label for="branch">branch</label>
+                    <input type="text" name="branch">
+                    <label for="paydate">paydate</label>
+                    <input type="text" name="paydate">
+                    <label for="paystatus">paystatus</label>
+                    <input type="text" name="paystatus">
+                    <label for="dateofreceipt">dateofreceipt</label>
+                    <input type="text" name="dateofreceipt">
+                    <!-- Add other input fields for the order details -->
+                    
+                    <button type="submit" name="action" value="create_order">Create Order</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+
+{% if order_created %}
+    <div>
+        Order for {{ selected_customer.membername }} created successfully!
+    </div>
+{% endif %}
 {% endblock %}
