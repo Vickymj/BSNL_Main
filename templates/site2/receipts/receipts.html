@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 <div class="panel mt-6">
-    {% for mydata in data %}
+  
     <table>
         <thead>
             <tr>
@@ -17,6 +17,7 @@
             </tr>
         </thead>
         <tbody>
+          {% for mydata in data %}
             <tr>
                 <td>{{mydata.id}}</td>
                 <td>{{mydata.membername}}</td>
@@ -26,7 +27,7 @@
                 <td>{{mydata.paystatus}}</td>
                 <td></td>
                 <td align="center">
-                    <a href="update_branchdata/{{mydata.id}}" class="btn btn-outline-success btn-sm">Update</a>
+                    <a href="update_data/{{mydata.id}}" class="btn btn-outline-success btn-sm">Update</a>
                     <a href="" onclick="confirmDelete()" class="btn btn-outline-danger btn-sm">Delete</a>
                   </td>
             </tr>
@@ -38,9 +39,10 @@
                   }
                 }
               </script>
+          {%endfor%}
         </tbody>
     </table>
-    {%endfor%}
+    
 </div>
 <!-- script -->
 {% endblock %}

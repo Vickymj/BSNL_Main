@@ -65,7 +65,7 @@ def generate(request):
     selected_customer = None
     order_created = False
     matching_customers = []
-
+    membername = None 
     if request.method == 'POST':
         action = request.POST.get('action')
 
@@ -138,10 +138,15 @@ def project_view(request):
     }
     return render(request,'page/home.html', {"data": data})
 def update_data(request, id):
-    venue = State.objects.get(id=id)
-    form = StateForm(request.POST or None, instance=venue)
+    venue = Receipt.objects.get(id=id)
+    form = ReceiptForm(request.POST or None, instance=venue)
     if form.is_valid():
         form.save()
-        return redirect('/alldata')
-    return render(request,'update_data.html',{'venue':venue,
+        return redirect('receipt')
+    return render(request,'site2/receipts/update_data.html',{'venue':venue,
                                                 'form':form})
+
+def delete_data(request, id):
+        data = Receipt.objects.get(pk=id)
+        data.delete()
+        return redirect('receipt')                                                

@@ -2,55 +2,82 @@
 {% block content %}
 {% load static %}
 
-<form method="post">
+<form method="post" class="space-y-5 ">
     {% csrf_token %}
-    <label for="search_membername">Search Customer:</label>
-    <input type="text" name="search_membername" id="search_membername" required>
-    <button type="submit" name="action" value="search_customer">Search Customer</button>
+    <div class="panel" >
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+            <label for="search_membername">Search your Customer:</label>
+            <input type="text" class="form-input" name="search_membername" id="search_membername" required>
+            <button type="submit" class="btn btn-primary text-lg font-semibold dark:text-white-light" name="action" value="search_customer">Search Customer</button>
+        </div>
+    </div>
 </form>
 
-{% if matching_customers %}
-    <h2>Matching Customers:</h2>
+{% if matching_customers %}   
     <ul>
         {% for customer in matching_customers %}
             <li>
-                {{ customer.membername }}
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="selected_customer" value="{{ customer.id }}">
-                    
-                    <label for="seniorityno">Seniority No:</label>
-                    <input type="text" name="seniorityno" required>
-                    
-                    <label for="amount">Amount:</label>
-                    <input type="text" name="amount" required>
-                    <label for="dimension">Dimension</label>
-                    <input type="text" name="dimension">
-                    <label for="modeofpay">modeofpay</label>
-                    <input type="text" name="modeofpay">
-                    <label for="bank">bank</label>
-                    <input type="text" name="bank">
-                    <label for="chequeno">chequeno</label>
-                    <input type="text" name="chequeno">
-                    <label for="branch">branch</label>
-                    <input type="text" name="branch">
-                    <label for="paydate">paydate</label>
-                    <input type="text" name="paydate">
-                    <label for="paystatus">paystatus</label>
-                    <input type="text" name="paystatus">
-                    <label for="dateofreceipt">dateofreceipt</label>
-                    <input type="text" name="dateofreceipt">
-                    <!-- Add other input fields for the order details -->
-                    
-                    <button type="submit" name="action" value="create_order">Create Order</button>
-                </form>
+                <div class="panel">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div>
+                            <label for="seniorityno">Customers:</label>
+                            <input class="form-input" type="text" name="membername" required disabled value="{{ customer.membername }}">
+                        </div>
+                        <div>
+                            <label for="seniorityno">Seniority No:</label>
+                            <input class="form-input" type="text" name="seniorityno" required disabled value="{{ customer.seniorityno }}">
+                        </div>
+                        <div >
+                            <label for="amount">Amount:</label>
+                            <input class="form-input" type="text" name="amount" required disabled value="{{ customer.amount }}">
+                        </div>
+                        <div class="p-1">
+                            <label for="dimension">Dimension</label>
+                            <input class="form-input" type="text" name="dimension" disabled value="{{ customer.dimension }}">
+                        </div>
+                        <div class="p-1">
+                            <label for="modeofpay">modeofpay</label>
+                            <input class="form-input" type="text" name="modeofpay">
+                        </div>
+                        <div class="p-1">
+                            <label for="bank">bank</label>
+                            <input class="form-input" type="text" name="bank">
+                        </div>
+                        <div class="p-1">
+                            <label for="chequeno">chequeno</label>
+                            <input class="form-input" type="text" name="chequeno">
+                        </div>
+                        <div class="p-1">
+                            <label for="branch">branch</label>
+                            <input class="form-input" type="text" name="branch">
+                        </div>
+                        <div class="p-1">
+                            <label for="paydate">paydate</label>
+                            <input class="form-input" type="date" name="paydate">
+                        </div>
+                        <div class="p-1">
+                            <label for="paystatus">paystatus</label>
+                            <input class="form-input" type="text" name="paystatus">
+                        </div>
+                        <div class="p-1">
+                            <label for="dateofreceipt">dateofreceipt</label>
+                            <input  class="form-input" type="date" name="dateofreceipt">
+                        </div>
+                        
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div>
+                            <label></label>
+                        </div>
+                        <div class="p-1">
+                            <center><button type="submit" class="btn btn-success text-lg font-semibold dark:text-white-light" name="action" value="create_order">Create Order</button></center>
+                        </div>
+                    </div>
+                </div>
             </li>
         {% endfor %}
     </ul>
-{% endif %}
-
-
-
+{%endif%}
 {% if order_created %}
     <div>
         Order for {{ selected_customer.membername }} created successfully!

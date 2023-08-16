@@ -7,7 +7,9 @@ urlpatterns = [
 	path('newbooking',views.newbooking,name='newbooking'),
 	path('generate',views.generate),
 	path('newbooking',views.newbooking),
-	path('receipt',views.receipt),
+	path('receipt',views.receipt,name='receipt'),
 	path('login',views.login),
 	path('project',views.project,name='project'),
+	path('update_data/<int:id>',views.update_data, name='update_data'),
+	path('delete_data/<str:id>',views.delete_data, name='delete_data'),
 ]
