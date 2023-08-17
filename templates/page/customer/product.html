@@ -1,18 +1,19 @@
-{% extends 'site2/index.html'%}
+{% extends 'page/customer/index.html' %}
 {% block content %}
 {% load static %}
+
 <div class="panel mt-6">
   
     <table>
         <thead>
             <tr>
                 <th>S.NO</th>
-                <th>Customer Name</th>
+                <th>Property Name</th>
                 <th>Date of Receipt</th>
                 <th>Receipt No</th>
                 <th>Cheque No</th>
                 <th>Amount</th>
-                <th>Pay Status</th>
+                <th></th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -44,5 +45,6 @@
     </table>
     
 </div>
-<!-- script -->
+
+
 {% endblock %}

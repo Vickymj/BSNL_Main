@@ -1,14 +1,14 @@
 from django.db import models
 from datetime import datetime,date
+from django.contrib.auth.models import User
 # Create your models here.
 class Newbooking(models.Model):
-	membername = models.CharField(max_length=120)
-	fathername = models.CharField(max_length=120)
+	# membername = models.CharField(max_length=120)
+	# fathername = models.CharField(max_length=120)
 	dob = models.DateField()
 	age = models.CharField(max_length=100)
-	moblieno = models.CharField(max_length=100)
 	alternateno = models.CharField(max_length=100)
-	emailid = models.CharField(max_length=100)
+	# emailid = models.CharField(max_length=100)
 	address = models.CharField(max_length=100)
 	panno = models.CharField(max_length=100)
 	aadhhaarno = models.CharField(max_length=100)
@@ -18,6 +18,7 @@ class Newbooking(models.Model):
 	nomieeaddress = models.CharField(max_length=100)
 	project = models.CharField(max_length=100)
 	dimension = models.CharField(max_length=100)
+	moblieno = models.CharField(max_length=100)
 	total= models.CharField(max_length=100)
 	downpayment = models.CharField(max_length=100)
 	siterefer = models.CharField(max_length=100)
@@ -30,10 +31,9 @@ class Newbooking(models.Model):
 	seniorityno = models.CharField(max_length=100)
 	amno = models.CharField(max_length=100)
 	receiptno = models.CharField(max_length=100)
-	class Meta:
-		db_table='newbook'
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
 class Family(models.Model):
-	membername = models.ForeignKey(Newbooking, on_delete=models.CASCADE)
+	username = models.ForeignKey(Newbooking, on_delete=models.CASCADE)
 	familymemname=models.CharField(max_length=100)
 	familymemage=models.CharField(max_length=10)
 	familymemrelation=models.CharField(max_length=100)
@@ -56,8 +56,8 @@ class Project(models.Model):
 # 	address = models.CharField(max_length=100)
 
 class Receipt(models.Model):
-	membername = models.ForeignKey(Newbooking, on_delete=models.CASCADE)
-	seniorityno=models.CharField(max_length=120)
+	membername = models.CharField(max_length=120)
+	seniorityno=models.ForeignKey(Newbooking, on_delete=models.CASCADE)
 	dimension=models.CharField(max_length=120)
 	amount=models.CharField(max_length=120)
 	modeofpay=models.CharField(max_length=120)
