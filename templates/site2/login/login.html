@@ -37,15 +37,15 @@
                 <p class="mb-7">Enter your Moblie Number and password to login</p>
                 <form class="space-y-5" action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
-                    <div>
-                        <label for="moblieno">PhoneNo</label>
-                        <input id="moblieno" type="text" class="form-input" placeholder="Enter PhoneNo" />
-                    </div>
-                    <div>
-                        <label for="password">Password</label>
-                        <input id="password" type="password" class="form-input" placeholder="Enter Password" />
-                    </div>
-                    <button type="submit" class="btn btn-primary w-full">SIGN IN</button>
+                        <div>
+                            <label for="username">PhoneNo</label>
+                            <input id="username" type="text" name="username" class="form-input" placeholder="Enter PhoneNo" />
+                        </div>
+                        <div>
+                            <label for="password">Password</label>
+                            <input id="password" type="password" name="password" class="form-input" placeholder="Enter Password" />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full">SIGN IN</button>
                 </form>
             </div>
         </div>

@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 
-<form method="post" class="space-y-5 ">
+<form method="POST" class="space-y-5">
     {% csrf_token %}
     <div class="panel" >
         <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -14,14 +14,16 @@
 </form>
 
 {% if matching_customers %}
+<form method="POST" action="" class="space-y-5">
+    {% csrf_token %}
     <ul>
         {% for customer in matching_customers %}
             <li>
                 <div class="panel">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div>
-                            <label for="seniorityno">Customers:</label>
-                            <input class="form-input" type="text" name="membername" required disabled value="{{ customer.membername }}">
+                            <label for="customer">Customers:</label>
+                            <input class="form-input" type="text" name="username" required disabled value="{{ customer.username }}">
                         </div>
                         <div>
                             <label for="seniorityno">Seniority No:</label>
@@ -77,6 +79,8 @@
             </li>
         {% endfor %}
     </ul>
+</form>
+    
 {%endif%}
 {% if order_created %}
     <div>

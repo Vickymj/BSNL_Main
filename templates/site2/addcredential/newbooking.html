@@ -10,7 +10,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
             <div class="p-1">
                 <label class="p-1">Member Name</label>
-                {% render_field form.membername placeholder="Member Name" class+="form-input" %}
+                {% render_field form.username placeholder="Member Name" class+="form-input" %}
             </div>
             <div class="p-1">
                 <label class="p-1">Father/Husband Name</label>
@@ -54,6 +54,10 @@
             <div class="p-1">
                 <label class="p-1">Aadhaar Number</label>
                 {% render_field form.aadhhaarno type="number" placeholder="Aadhaar Number" class+="form-input"%}
+            </div>
+            <div class="p-1">
+                <label class="p-1">Role</label>
+                {% render_field form.role type="choice" placeholder=" Number" class+="form-input"%}
             </div>
         </div>
     </div>

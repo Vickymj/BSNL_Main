@@ -1,9 +1,13 @@
 from django.db import models
 from datetime import datetime,date
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
+# class User(AbstractUser):
+# 	is_customer=models.BooleanField('is_customer',default=False)
+# 	is_admin=models.BooleanField('is_admin',default=False)
+# 	is_adminuser=models.BooleanField('is_adminuser',default=False)
 class Newbooking(models.Model):
-	# membername = models.CharField(max_length=120)
 	# fathername = models.CharField(max_length=120)
 	dob = models.DateField()
 	age = models.CharField(max_length=100)
@@ -31,13 +35,15 @@ class Newbooking(models.Model):
 	seniorityno = models.CharField(max_length=100)
 	amno = models.CharField(max_length=100)
 	receiptno = models.CharField(max_length=100)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	username = models.ForeignKey(User, on_delete=models.CASCADE)
 class Family(models.Model):
-	username = models.ForeignKey(Newbooking, on_delete=models.CASCADE)
+	username = models.ForeignKey(User, on_delete=models.CASCADE)
 	familymemname=models.CharField(max_length=100)
 	familymemage=models.CharField(max_length=10)
 	familymemrelation=models.CharField(max_length=100)
-
+class Role(models.Model):
+	username = models.ForeignKey(User, on_delete=models.CASCADE)
+	role = models.CharField(max_length=15)
 #Project create
 class Project(models.Model):
 	projectname=models.CharField(max_length=100)
@@ -56,7 +62,7 @@ class Project(models.Model):
 # 	address = models.CharField(max_length=100)
 
 class Receipt(models.Model):
-	membername = models.CharField(max_length=120)
+	username = models.CharField(max_length=120)
 	seniorityno=models.ForeignKey(Newbooking, on_delete=models.CASCADE)
 	dimension=models.CharField(max_length=120)
 	amount=models.CharField(max_length=120)
@@ -67,5 +73,4 @@ class Receipt(models.Model):
 	paydate=models.DateField(max_length=120)
 	paystatus=models.CharField(max_length=120)
 	dateofreceipt=models.DateField(max_length=120)
-	class Meta:
-		db_table:'recepit'
+

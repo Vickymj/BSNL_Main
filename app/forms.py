@@ -1,9 +1,14 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Newbooking,Project,Receipt
-
+from .models import Newbooking,Project,Receipt,Role
+CHOOSE_CHOICES = (
+	('customer','CUSTOMER'),
+	('admin','ADMIN'),
+	('adminuser','ADMINUSER'),
+	
+)
 class NewbookingForm(forms.Form):
-	membername = forms.CharField(max_length=120)
+	username = forms.CharField(max_length=120)
 	fathername = forms.CharField(max_length=120)
 	dob = forms.DateField()
 	age = forms.CharField(max_length=100)
@@ -34,7 +39,7 @@ class NewbookingForm(forms.Form):
 	familymemname=forms.CharField(max_length=100)
 	familymemage=forms.CharField(max_length=10)
 	familymemrelation=forms.CharField(max_length=100)
-
+	role=forms.ChoiceField(choices = CHOOSE_CHOICES)
 class ProjectForm(forms.ModelForm):
 	class Meta:
 		model=Project
@@ -42,7 +47,7 @@ class ProjectForm(forms.ModelForm):
 class ReceiptForm(forms.ModelForm):
 	class Meta:
 		model=Receipt
-		fields = ['membername', 'seniorityno', 'dimension', 'amount', 'modeofpay', 'chequeno', 'bank', 'branch', 'paydate', 'paystatus', 'dateofreceipt']
+		fields = ['username', 'seniorityno', 'dimension', 'amount', 'modeofpay', 'chequeno', 'bank', 'branch', 'paydate', 'paystatus', 'dateofreceipt']
 class SearchForm(forms.Form):
-	membername = forms.CharField(max_length=120)
+	seniorityno = forms.CharField(max_length=120)
 	

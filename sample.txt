@@ -1,0 +1,58 @@
+def user_login(request):
+if request.method == 'POST':
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    user = authenticate(username = username , password = password)
+    if user:
+        if user.is_active:
+
+             login(request, user)
+             return HttpResponseRedirect(reverse('index'))
+        else:
+            return HttpResponse("ACCount not active!!")
+
+    else:
+        print("someone tried to login and falied!")
+        print("Username : {} and Password : {}".format(username,password))
+        return HttpResponse("Invalid credentials!")
+
+else:
+    return render(request , 'NewApp/login.html' , {})
+
+forms method
+
+
+# authentication/views.py
+from django.shortcuts import render
+
+from . import forms
+
+
+def login_page(request):
+    form = forms.LoginForm()
+    if request.method == 'POST':
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            pass
+    return render(request, 'authentication/login.html', context={'form': form})
+
+from django.contrib.auth import login, authenticate  # add to imports
+
+def login_page(request):
+    form = forms.LoginForm()
+    message = ''
+    if request.method == 'POST':
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+            )
+            if user is not None:
+                login(request, user)
+                message = f'Hello {user.username}! You have been logged in'
+            else:
+                message = 'Login failed!'
+    return render(
+        request, 'authentication/login.html', context={'form': form, 'message': message})
