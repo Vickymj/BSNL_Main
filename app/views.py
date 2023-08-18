@@ -92,46 +92,44 @@ def generate(request):
                 matching_customers = customers
 
         elif action == 'create_order':
-            bank = request.POST['bank']
-            print(bank)
-            return HttpResponse('done')
-            # customer = Newbooking.objects.get(seniorityno=seniorityno)
+            seniorityno = request.POST.get('seniorityno')
+            customer = Newbooking.objects.get(seniorityno=seniorityno)
     
            
-            # username = request.POST.get('username')
-            # seniorityno = seniorityno
-            # amount = request.POST.get('amount')
-            # modeofpay = request.POST.get('modeofpay')
-            # chequeno = request.POST.get('chequeno')
-            # bank = request.POST.get('bank')
-            # branch = request.POST.get('branch')
-            # paydate = request.POST.get('paydate')
-            # paystatus = request.POST.get('paystatus')
-            # dateofreceipt = request.POST.get('dateofreceipt')
+            username = request.POST.get('username')
+            seniorityno = seniorityno
+            amount = request.POST.get('amount')
+            modeofpay = request.POST.get('modeofpay')
+            chequeno = request.POST.get('chequeno')
+            bank = request.POST.get('bank')
+            branch = request.POST.get('branch')
+            paydate = request.POST.get('paydate')
+            paystatus = request.POST.get('paystatus')
+            dateofreceipt = request.POST.get('dateofreceipt')
 
-            # try:
-            #     customer = Newbooking.objects.get(seniorityno=123)
-            #     print('cust',customer)
+            try:
+                customer = Newbooking.objects.get(seniorityno=123)
+                print('cust',customer)
 
-            #     # Create a new order instance
-            #     order = Receipt(
-            #         username=username,
-            #         seniorityno=customer,
-            #         amount=amount,
-            #         modeofpay=modeofpay,
-            #         chequeno=chequeno,
-            #         bank=bank,
-            #         branch=branch,
-            #         paydate=paydate,
-            #         paystatus=paystatus,
-            #         dateofreceipt=dateofreceipt
-            #     )
-            #     print('or:',order)
-            #     order.save()
-            #     order_created = True
+                # Create a new order instance
+                order = Receipt(
+                    username=username,
+                    seniorityno=customer,
+                    amount=amount,
+                    modeofpay=modeofpay,
+                    chequeno=chequeno,
+                    bank=bank,
+                    branch=branch,
+                    paydate=paydate,
+                    paystatus=paystatus,
+                    dateofreceipt=dateofreceipt
+                )
+                print('or:',order)
+                order.save()
+                order_created = True
 
-            # except Newbooking.DoesNotExist:
-            #     print('faile')
+            except Newbooking.DoesNotExist:
+                print('faile')
 
     return render(request, 'site2/addcredential/generate.html', {'selected_customer': selected_customer, 'order_created': order_created, 'matching_customers': matching_customers})
 
