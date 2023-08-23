@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from . import customerviews
+
 urlpatterns = [
    path('', views.index, name='home'),
    path('home',views.index),
@@ -13,5 +14,7 @@ urlpatterns = [
    path('about',views.about),
    # customer views
    path('customer/home',customerviews.home),
-   path('customer/product',customerviews.product),
+   path('customer/product/',customerviews.product),
+   path('customer/payment',customerviews.payment),
+   path('customer/pdf',customerviews.pdf)
 ]

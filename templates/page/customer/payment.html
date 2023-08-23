@@ -17,18 +17,14 @@
       </thead>
       <tbody>
           <tr>
-            <td>{{user.id}}</td>
-            <td>{{user.username}}</td>
-            {% if rec %}
-                <h2>Your Receipts:</h2>
-                <ul>
-                {% for receipt in rec %}
-                    <li>{{ receipt.date }} - Total: {{ receipt.total_amount }}</li>
-                {% endfor %}
-                </ul>
-            {% else %}
-                <p>No receipts found.</p>
-            {% endif %}            
+              <td></td>
+              <td>Muthu</td>
+            
+              <td>12-june-2023</td>
+              <td>4</td>
+              <td>125000</td>
+              <td></td>
+              <td><a href="pdf">Download PDF</a></td>
           </tr>
       </tbody>
   </table>

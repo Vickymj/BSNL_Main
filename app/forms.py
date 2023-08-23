@@ -40,6 +40,7 @@ class NewbookingForm(forms.Form):
 	familymemage=forms.CharField(max_length=10)
 	familymemrelation=forms.CharField(max_length=100)
 	role=forms.ChoiceField(choices = CHOOSE_CHOICES)
+	password=forms.CharField(max_length=100)
 class ProjectForm(forms.ModelForm):
 	class Meta:
 		model=Project

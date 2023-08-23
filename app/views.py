@@ -7,12 +7,16 @@ from .forms import NewbookingForm,ProjectForm,ReceiptForm,SearchForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login as auth_login
+from django.contrib.auth.decorators import permission_required
 
 # Create your views here.
+@login_required
 def home1(request):
 	return render(request,'site2/home.html')
+
 def booksum(request):
 	return render(request,'site2/dashboard/booksum.html')
+
 def bss(request):
 	return render(request,'site2/dashboard/bss.html')
 
@@ -51,15 +55,16 @@ def newbooking(request):
             familymemname = form.cleaned_data['familymemname']
             familymemage = form.cleaned_data['familymemage']  # Add this line
             familymemrelation = form.cleaned_data['familymemrelation'] 
-            role=form.cleaned_data['role']   
+            role=form.cleaned_data['role']  
+            password=form.cleaned_data['password'] 
             # user model
-            user_instance = User(username=username,last_name=fathername,email=emailid) 
+            user_instance = User(username=username,last_name=fathername,email=emailid,password=password) 
             user_instance.save()       
             # Save to Test model
             test_instance = Newbooking(username=user_instance, dob=dob, age=age, moblieno=moblieno, alternateno=alternateno, address=address, panno=panno, aadhhaarno=aadhhaarno, nomieename=nomieename, nomieeage=nomieeage, nomieerelationship=nomieerelationship, nomieeaddress=nomieeaddress, project=project, dimension=dimension, total=total, downpayment=downpayment, siterefer=siterefer, modeofpay=modeofpay, bank=bank, branch=branch, chequeno=chequeno, paydate=paydate, amount=amount, seniorityno=seniorityno, amno=amno, receiptno=receiptno)
             test_instance.save()
             # Save to Value model
-            value_instance = Family(username=test_instance,familymemname=familymemname,familymemage=familymemage,familymemrelation=familymemrelation)
+            value_instance = Family(username=user_instance,familymemname=familymemname,familymemage=familymemage,familymemrelation=familymemrelation)
             value_instance.save()
             # Save to Role
             role_instance = Role(username=user_instance,role=role)
@@ -129,7 +134,7 @@ def generate(request):
                 order_created = True
 
             except Newbooking.DoesNotExist:
-                print('faile')
+                print('failed')
 
     return render(request, 'site2/addcredential/generate.html', {'selected_customer': selected_customer, 'order_created': order_created, 'matching_customers': matching_customers})
 
@@ -145,25 +150,33 @@ def receipt(request):
         "data":data
     }
     return render(request,'site2/receipts/receipts.html', {"data": data})
+
 def login(request):
+    error_message = None
+    users = User.objects.all()
+    for user in users:
+         print(user.username)
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
-        user = authenticate(request, username = username , password = password)
-        if user is not None:
+        user = authenticate(request, username=username, password=password)
+        if user:
             auth_login(request, user)
-            user_profile = User.objects.get('role')
-            if user_profile.role == 'admin':
-                return redirect('home1')
-            else:
-                return redirect('home')
+            try:
+                role = Role.objects.get(username=user)
+                if role.role == 'admin':
+                    return redirect('home1')
+                elif role.role == 'customer':
+                    return redirect('/customer/home')
+                # Add more role checks here
+
+            except Role.DoesNotExist:
+                error_message = "Role not defined for this user"
         else:
-            print("someone tried to login and falied!")
-            print("Username : {} and Password : {}".format(username,password))
-            return HttpResponse("Invalid credentials!")
-    else:
-	    return render(request,'site2/login/login.html')
+            error_message = "Invalid username or password"
+
+    return render(request, 'site2/login/login.html', {'error_message': error_message})
 
 def project(request):
     if request.method == 'POST':
@@ -176,12 +189,14 @@ def project(request):
         form = ProjectForm()
         messages.success(request, '. You can log in now!')
     return render(request,'site2/project/project.html',{'form':form, })
+
 def project_view(request):
     data = Project.objects.all()
     context={
         "data":data
     }
     return render(request,'page/home.html', {"data": data})
+
 def update_data(request, id):
     venue = Receipt.objects.get(id=id)
     form = ReceiptForm(request.POST or None, instance=venue)
@@ -197,4 +212,7 @@ def delete_data(request, id):
         return redirect('receipt') 
 
 def confirmletter(request):
-    return render(request,'site2/receipts/confirmleter.html')    
+    return render(request,'site2/receipts/confirmleter.html')
+
+def ugdg(request):
+     return render(request,'site2/addcredential/ugdg.html')

@@ -1,6 +1,17 @@
 {% extends 'site2/index.html'%}
 {% block content %}
 {% load static %}
+
+<div class="p-2">
+  <ul class="flex space-x-2 rtl:space-x-reverse">
+      <li>
+          <a href="home1" class="text-primary hover:underline" style="font-size: larger;">Dashboard</a>
+      </li>
+      <li class="before:content-['/'] ltr:before:mr-1 rtl:before:ml-1" style="font-size: larger;">
+          <span>Receipt</span>
+      </li>
+  </ul>
+</div>
 <div class="panel mt-6">
   
     <table>
@@ -20,7 +31,7 @@
           {% for mydata in data %}
             <tr>
                 <td>{{mydata.id}}</td>
-                <td>{{mydata.membername}}</td>
+                <td>{{mydata.username}}</td>
                 <td>{{mydata.paydate}}</td>
                 <td>{{mydata.amount}}</td>
                 <td>{{mydata.modeofpay}}</td>

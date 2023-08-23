@@ -1,9 +1,12 @@
-from django.shortcuts import render
-from app.models import Project
-from app.models import Newbooking
+from django.shortcuts import render,redirect
+from app.models import Project,Receipt
+from app.models import Newbooking,Role
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login as auth_login
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 # Create your views here.
 def index(request):
     data = Project.objects.all()
@@ -33,7 +36,36 @@ def board(request):
     return render(request, 'page/board.html')
 
 def signin(request):
-    return render(request,'page/login/signin.html')
+    error_message = None
+    users = User.objects.all()
+    for user in users:
+         print(user.username)
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print('hello')
+        user = authenticate(request, username=username, password=password)
+        print(user)
+
+        if user:
+            auth_login(request, user)
+            print(username)
+            try:
+                role = Role.objects.get(username=user)
+                if role.role == 'admin':
+                    print(role)
+                    return redirect('home1')
+                elif role.role == 'customer':
+                    return redirect('home')
+                # Add more role checks here
+
+            except Role.DoesNotExist:
+                error_message = "Role not defined for this user"
+        else:
+            error_message = "Invalid username or password"
+
+    return render(request,'site2/login/login.html', {'error_message': error_message})
 
 def about(request):
     return render(request,'page/about.html  ')
@@ -41,25 +73,10 @@ def about(request):
 def test(request):
     return render(request,'page/customer/home.html')
  
-def login(request):
-    if request.method == 'POST':
-        membername = request.POST.get('membername')
-        moblieno = request.POST.get('moblieno')
 
-        # Query the register table for a matching name
-        try:
-            detail = Newbooking.objects.get(membername=membername,password=password)
-        except Newbooking.DoesNotExist:
-            error_message = 'Invalid username or password'
-            return render(request, 'second/login.html', {'error_message': error_message})
-
-        if detail.moblieno == moblieno:
-            # Passwords match, perform successful login
-            return render(request, 'second/home.html')
-        else:
-            # Incorrect password
-            error_message = 'Invalid username or password'
-            return render(request, 'second/login.html', {'error_message': error_message})
-    else:
-        # GET request method used
-        return render(request, 'second/login.html')
+def product(request):
+    value = Receipt.objects.all()
+    context={
+        "value":value
+    }
+    return render(request,'page/customer/product.html', {"value": value})
