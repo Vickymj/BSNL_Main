@@ -92,9 +92,9 @@
             </div>
         </div>
     </div>
-    <div class="panel p">
+    <div class="panel p" id="container">
         <h1 class="text-lg font-semibold dark:text-white-light p-1" style="background-color: rgb(138, 202, 167);"><b>Family Details</b></h1>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-5" id="container">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-5" >
             <div class="p-1"> 
                 <label class="p-1">Family-Member Name</label>
                 {% render_field form.familymemname type="text" placeholder="Enter Family-Member Name" class+="form-input"%}
@@ -203,19 +203,18 @@
         
         var newRow = document.createElement("div");
         newRow.innerHTML = `
-        <div class="p-1"> 
-                <label class="p-1">Family-Member Name</label>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-5 p-1">
+            <div class="p-1"> 
                 {% render_field form.familymemname type="text" placeholder="Enter Family-Member Name" class+="form-input"%}
             </div>
             <div class="p-1">
-                <label class="p-1">Family-Member Age</label>
                 {% render_field form.familymemage type="text" placeholder="Enter Family-Member Age" class+="form-input"%}
             </div>
             <div class="p-1">
-                <label class="p-1">Family-Member Relationship</label>
                 {% render_field form.familymemrelation type="text" placeholder="Enter Family-Member Relationship" class+="form-input"%}
             </div>
-            <button class="btn btn-danger text-lg font-semibold dark:text-white-light" onclick="remove_field(this)">Close</button>
+            <button class="btn btn-danger text-lg font-semibold dark:text-white-light"style="padding: 10px 24px;" type="button" onclick="remove_field(this)">Close</button>
+        </div>
         `;
         
         container.appendChild(newRow);

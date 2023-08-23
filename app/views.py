@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from .models import Newbooking,Family,Project,Receipt,Role
 from .forms import NewbookingForm,ProjectForm,ReceiptForm,SearchForm
 from django.contrib import messages
+from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login as auth_login
 from django.contrib.auth.decorators import permission_required
@@ -12,14 +13,17 @@ from django.contrib.auth.decorators import permission_required
 # Create your views here.
 @login_required
 def home1(request):
-	return render(request,'site2/home.html')
+	return render(request,'site2/commons/home.html')
 
+@login_required
 def booksum(request):
 	return render(request,'site2/dashboard/booksum.html')
 
+@login_required
 def bss(request):
 	return render(request,'site2/dashboard/bss.html')
 
+@login_required
 def newbooking(request):
     if request.method == 'POST':
         form = NewbookingForm(request.POST)
@@ -76,6 +80,7 @@ def newbooking(request):
 
     return render(request,  'site2/addcredential/newbooking.html',{'form':form, })
 
+@login_required
 def generate(request):
     selected_customer = None
     order_created = False
@@ -138,12 +143,14 @@ def generate(request):
 
     return render(request, 'site2/addcredential/generate.html', {'selected_customer': selected_customer, 'order_created': order_created, 'matching_customers': matching_customers})
 
+@login_required
 def create_receipt(request):
      if request.method == 'POST':
           amount = request.POST.get('amount')
           print(amount)
           return HttpResponse('done')
-          
+
+@login_required      
 def receipt(request):
     data = Receipt.objects.all()
     context={
@@ -151,33 +158,7 @@ def receipt(request):
     }
     return render(request,'site2/receipts/receipts.html', {"data": data})
 
-def login(request):
-    error_message = None
-    users = User.objects.all()
-    for user in users:
-         print(user.username)
-
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user:
-            auth_login(request, user)
-            try:
-                role = Role.objects.get(username=user)
-                if role.role == 'admin':
-                    return redirect('home1')
-                elif role.role == 'customer':
-                    return redirect('/customer/home')
-                # Add more role checks here
-
-            except Role.DoesNotExist:
-                error_message = "Role not defined for this user"
-        else:
-            error_message = "Invalid username or password"
-
-    return render(request, 'site2/login/login.html', {'error_message': error_message})
-
+@login_required
 def project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
@@ -190,6 +171,7 @@ def project(request):
         messages.success(request, '. You can log in now!')
     return render(request,'site2/project/project.html',{'form':form, })
 
+@login_required
 def project_view(request):
     data = Project.objects.all()
     context={
@@ -197,6 +179,7 @@ def project_view(request):
     }
     return render(request,'page/home.html', {"data": data})
 
+@login_required
 def update_data(request, id):
     venue = Receipt.objects.get(id=id)
     form = ReceiptForm(request.POST or None, instance=venue)
@@ -206,13 +189,25 @@ def update_data(request, id):
     return render(request,'site2/receipts/update_data.html',{'venue':venue,
                                                 'form':form})
 
+@login_required
 def delete_data(request, id):
         data = Receipt.objects.get(pk=id)
         data.delete()
         return redirect('receipt') 
 
+@login_required
 def confirmletter(request):
     return render(request,'site2/receipts/confirmleter.html')
 
+@login_required
 def ugdg(request):
      return render(request,'site2/addcredential/ugdg.html')
+
+@login_required
+def transfer(request):
+     return render(request,'site2/addcredential/transfer.html')
+
+@login_required
+def logout(request):
+    auth_logout(request)
+    return redirect('/')
