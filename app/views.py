@@ -208,6 +208,18 @@ def transfer(request):
      return render(request,'site2/addcredential/transfer.html')
 
 @login_required
+def cancel(request):
+     return render(request,'site2/addcredential/cancel.html')
+     
+@login_required
+def leadowner(request):
+     return render(request,'site2/addcredential/lead_owner.html')
+
+@login_required
+def site_visit(request):
+     return render(request,'site2/addcredential/site_visit.html')
+
+@login_required
 def logout(request):
     auth_logout(request)
     return redirect('/')

@@ -14,5 +14,8 @@ urlpatterns = [
 	path('update_data/<int:id>',views.update_data, name='update_data'),
 	path('delete_data/<str:id>',views.delete_data, name='delete_data'),
     path('ugdg',views.ugdg,name='ugdg'),
-    path('transfer',views.transfer,name='transfer')
+    path('transfer',views.transfer,name='transfer'),
+    path('cancel',views.cancel,name='cancel'),
+    path('leadowner',views.leadowner,name='leadowner'),
+    path('site_visit',views.site_visit,name='site_visit')
 ]
