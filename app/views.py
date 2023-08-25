@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from .models import Newbooking,Family,Project,Receipt,Role
+from .models import Newbooking,Family,Project,Receipt,Role,Account,Nomiee,P
 from .forms import NewbookingForm,ProjectForm,ReceiptForm,SearchForm
 from django.contrib import messages
 from django.contrib.auth import logout as auth_logout
@@ -65,8 +65,17 @@ def newbooking(request):
             user_instance = User(username=username,last_name=fathername,email=emailid,password=password) 
             user_instance.save()       
             # Save to Test model
-            test_instance = Newbooking(username=user_instance, dob=dob, age=age, moblieno=moblieno, alternateno=alternateno, address=address, panno=panno, aadhhaarno=aadhhaarno, nomieename=nomieename, nomieeage=nomieeage, nomieerelationship=nomieerelationship, nomieeaddress=nomieeaddress, project=project, dimension=dimension, total=total, downpayment=downpayment, siterefer=siterefer, modeofpay=modeofpay, bank=bank, branch=branch, chequeno=chequeno, paydate=paydate, amount=amount, seniorityno=seniorityno, amno=amno, receiptno=receiptno)
+            test_instance = Newbooking(username=user_instance, dob=dob, age=age, moblieno=moblieno, alternateno=alternateno, address=address, panno=panno, aadhhaarno=aadhhaarno)
             test_instance.save()
+            # Save Account model
+            account_instance = Account(username=user_instance,modeofpay=modeofpay,bank=bank,branch=branch,chequeno=chequeno,paydate=paydate,amount=amount,seniorityno=seniorityno,amno=amno,receiptno=receiptno)
+            account_instance.save()
+            # Save Nomiee model
+            nomiee_instance= Nomiee(username=user_instance,nomieename=nomieename,nomieeage=nomieeage,nomieerelationship=nomieerelationship,nomieeaddress=nomieeaddress)
+            nomiee_instance.save()
+            # Save P model
+            p_instance = P(username=user_instance,project=project,dimension=dimension,downpayment=downpayment,siterefer=siterefer,total=total)
+            p_instance.save()
             # Save to Value model
             value_instance = Family(username=user_instance,familymemname=familymemname,familymemage=familymemage,familymemrelation=familymemrelation)
             value_instance.save()
@@ -74,7 +83,7 @@ def newbooking(request):
             role_instance = Role(username=user_instance,role=role)
             role_instance.save()
 
-            return HttpResponse('/newbooking')
+            return HttpResponseRedirect('newbooking')
     else:
         form = NewbookingForm()
 
@@ -219,6 +228,9 @@ def leadowner(request):
 def site_visit(request):
      return render(request,'site2/addcredential/site_visit.html')
 
+@login_required
+def reg(request):
+     return render(request,'registration/register.html')
 @login_required
 def logout(request):
     auth_logout(request)
