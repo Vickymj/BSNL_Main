@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'app',
     'page',
     'widget_tweaks',
-    'vicky',
 ]
 
 MIDDLEWARE = [
