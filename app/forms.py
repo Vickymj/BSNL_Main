@@ -51,9 +51,10 @@ class ReceiptForm(forms.ModelForm):
 		fields = ['username', 'seniorityno', 'dimension', 'amount', 'modeofpay', 'chequeno', 'bank', 'branch', 'paydate', 'paystatus', 'dateofreceipt']
 class SearchForm(forms.Form):
 	seniorityno = forms.CharField(max_length=120)
-class Adminuser(forms.Form):
+class AdminuserForm(forms.Form):
 	username=forms.CharField(max_length=120)
-	dob=forms.CharField(max_length=120)
+	fathername=forms.CharField(max_length=120)
+	dob=forms.DateField()
 	age=forms.CharField(max_length=120)
 	moblieno=forms.CharField(max_length=120)
 	address=forms.CharField(max_length=120)
@@ -61,5 +62,6 @@ class Adminuser(forms.Form):
 	panno=forms.CharField(max_length=120)
 	aadhhaarno=forms.CharField(max_length=120)
 	poision=forms.CharField(max_length=120)
-	role=forms.CharField(max_length=120)
+	role=forms.ChoiceField(choices = CHOOSE_CHOICES)
 	emailid=forms.CharField(max_length=120)
+	password=forms.CharField(max_length=100)

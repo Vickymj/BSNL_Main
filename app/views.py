@@ -2,8 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from .models import Newbooking,Family,Project,Receipt,Role,Account,Nomiee,P
-from .forms import NewbookingForm,ProjectForm,ReceiptForm,SearchForm
+from .models import Newbooking,Family,Project,Receipt,Role,Account,Nomiee,P,Adminuser
+from .forms import NewbookingForm,ProjectForm,ReceiptForm,SearchForm,AdminuserForm
 from django.contrib import messages
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -228,9 +228,38 @@ def leadowner(request):
 def site_visit(request):
      return render(request,'site2/addcredential/site_visit.html')
 
-@login_required
+
 def reg(request):
-     return render(request,'registration/register.html')
+    if request.method == 'POST':
+        form= AdminuserForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data['username']
+            fathername = form.cleaned_data['fathername']
+            dob = form.cleaned_data['dob']
+            age = form.cleaned_data['age']
+            moblieno = form.cleaned_data['moblieno']
+            alternateno = form.cleaned_data['alternateno']
+            emailid = form.cleaned_data['emailid']
+            address = form.cleaned_data['address']
+            panno = form.cleaned_data['panno']
+            aadhhaarno = form.cleaned_data['aadhhaarno']
+            poision = form.cleaned_data['poision']
+            role=form.cleaned_data['role']
+            password = form.cleaned_data['password']
+            #user created
+            user_instance = User(username=username,last_name=fathername,email=emailid,password=password) 
+            user_instance.save()
+            #admin created
+            adminuser_instance = Adminuser(username=user_instance,dob=dob,age=age,moblieno=moblieno,alternateno=alternateno,address=address,panno=panno,aadhhaarno=aadhhaarno,poision=poision)
+            adminuser_instance.save()
+            # role created
+            role_instance = Role(username=user_instance,role=role)
+            role_instance.save()
+
+            return HttpResponseRedirect('reg')
+    else:
+        form = AdminuserForm()
+    return render(request,'registration/register.html',{'form':form})
 @login_required
 def logout(request):
     auth_logout(request)

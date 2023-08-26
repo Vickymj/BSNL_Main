@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 {% load widget_tweaks %}
-<form class="space-y-5 " method="POST" action="{% url 'newbooking' %}">
+<form class="space-y-5 " method="POST" action="{% url 'reg' %}">
     {% csrf_token %}
     <label class="text-lg font-semibold dark:text-white-light p-2" style="background-color: blueviolet; border-radius: 9px;"><b>ADD CREDENTIALS - New Booking</b></label>
     <h2 class="text-lg font-semibold dark:text-white-light p-1" style="background-color: rgb(138, 202, 167); border-radius: 9px;"><b>Member Particulars</b></h2>
@@ -24,6 +24,10 @@
                 <label class="p-1">Age</label>
                 {% render_field form.age type="number" placeholder="Age" class+="form-input" %}
             </div>
+            <div class="p-1">
+                <label class="p-1">Poision</label>
+                {% render_field form.poision type="text" placeholder="Poision" class+="form-input" %}
+            </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
             <div class="p-1">
@@ -39,9 +43,9 @@
                 {% render_field form.emailid type="email" placeholder="Emial-id" class+="form-input" %}
             </div>
             <div class="p-1">
-                <label> </label>
+                <label class="p-1">Password</label>
+                {% render_field form.password type="text" placeholder="Password" class+="form-input"%}
                 
-                <input type="file" class="form-input " placeholder="Add Document" name="">
             </div>
             <div class="p-1">
                 <label class="p-1">Residential Address</label>
