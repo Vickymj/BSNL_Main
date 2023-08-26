@@ -130,7 +130,7 @@ def generate(request):
                 customer = Newbooking.objects.get(seniorityno=123)
                 print('cust',customer)
 
-                # Create a new order instance
+                
                 order = Receipt(
                     username=username,
                     seniorityno=customer,
